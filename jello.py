@@ -13,6 +13,7 @@ import arity_notation
 import draw
 import tokens
 import utils
+import re
 from grid import Grid
 from utils import Chain, Quick, Separator
 
@@ -131,7 +132,7 @@ if __name__ == "__main__":
             algorithm.advisor(expr)
 
             expr = utils.remove_all(utils.split_keep_multiple_delimiters(expr, r" \(\)"), ["", " "])
-            args = args.split()
+            args = re.split(r'\s+(?=(?:[^"\']*["\'][^"\']*["\'])*[^"\']*$)', args)
 
             converted_expr = convert(expr)
             chain_type = Chain.MONADIC if len(args) == 1 else Chain.DYADIC
